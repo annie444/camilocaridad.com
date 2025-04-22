@@ -1,0 +1,84 @@
+---
+import { CamiloCaridadPineda } from '@components/Name.tsx';
+import { NavBar } from '@components/NavBar.tsx';
+---
+
+<div
+  class="w-[100vw] h-[100vh] m-auto flex flex-col flex-auto content-center items-center justify-center pointer-none glass z-10 relative"
+>
+  <div
+    class="flex flex-col flex-auto content-center justify-center items-center pointer-none"
+  >
+    <CamiloCaridadPineda client:load />
+    <hr class="separator separator--line" />
+    <NavBar
+      client:only="react"
+      links={[
+        { href: '/about', text: 'About' },
+        { href: '/portfolio', text: 'Portfolio' },
+        { href: '/resume', text: 'Resume' },
+        { href: '/contact', text: 'Contact' },
+      ]}
+    />
+  </div>
+</div>
+
+<svg
+  viewBox="0 0 200 200"
+  xmlns="http://www.w3.org/2000/svg"
+  class="fixed top-0 left-0 z-0"
+>
+  <path
+    fill="#FF0066"
+    d="M 53.7 -36.9 \
+    C  57.9 -23.7,  41.6  -4.6,  29.2  14.1 \
+    C  16.9  32.8,   8.4  51  ,  -2.5  52.4 \
+    C -13.3  53.8, -26.7  38.5, -35.7  21.7 \
+    C -44.7   5  , -49.4 -13.1, -42.7 -27.8 \
+    C -36.1 -42.4, -18   -53.6,   3.4 -55.5 \
+    C 24.7  -57.4,  49.5 -50.1,  53.7 -36.9 \
+    Z"
+    transform="translate(100 100)"></path>
+</svg>
+
+<script></script>
+
+<style>
+  :root {
+    --separator-size: 5px;
+    --separator-border-style: solid;
+    --separator-border-color: #000000;
+    --separator-space-top: 10px;
+    --separator-space-bottom: 10px;
+  }
+
+  .glass {
+    backdrop-filter: blur(23px) saturate(180%);
+    -webkit-backdrop-filter: blur(23px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0);
+  }
+
+  .separator {
+    margin-top: var(--separator-space-top);
+    margin-bottom: var(--separator-space-bottom);
+    border: 0;
+  }
+
+  .separator--line {
+    border: 0;
+    border-bottom: var(--separator-size) var(--separator-border-style)
+      var(--separator-border-color);
+
+    width: 0;
+    animation: separator-width 2s ease-out forwards;
+  }
+
+  @keyframes separator-width {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+</style>
