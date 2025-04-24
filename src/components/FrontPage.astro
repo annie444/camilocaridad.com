@@ -1,5 +1,5 @@
 ---
-// import { CamiloCaridadPineda } from '@components/Name.tsx';
+import { Typewriter } from '@components/Name.tsx';
 import { NavBar } from '@components/NavBar.tsx';
 import { Blob } from '@components/BgBlob.tsx';
 ---
@@ -10,11 +10,11 @@ import { Blob } from '@components/BgBlob.tsx';
   <div
     class="flex flex-col flex-auto content-center justify-center items-center pointer-none"
   >
-    <div class="text-center">
-      <h1 class="text-3xl font-bold">Camilo</h1>
-      <h1 class="text-3xl font-bold">Caridad</h1>
-      <h1 class="text-3xl font-bold">Pineda</h1>
-    </div>
+    <Typewriter
+      client:load
+      text={['Camilo', 'Caridad', 'Pineda']}
+      delay={100}
+    />
     <hr class="separator separator--line" />
     <NavBar
       client:only="react"
@@ -33,16 +33,16 @@ import { Blob } from '@components/BgBlob.tsx';
 <Blob client:load color="#00d061" center={{ x: -30, y: -75 }} wobble={30} />
 <Blob client:load color="#0007d0" center={{ x: 30, y: -25 }} wobble={30} />
 
-<style lang="scss">
-  $separator-size: 5px;
-  $separator-border-style: solid;
-  $separator-border-color: #000000;
-  $separator-space-top: 10px;
-  $separator-space-bottom: 10px;
-  $slides: 3;
-  $typing-duration: 5s;
-  $tab-letters: 6 7 6; //number of characters in each paragraph
-  $slider-font-size: 3rem;
+<script></script>
+
+<style>
+  :root {
+    --separator-size: 5px;
+    --separator-border-style: solid;
+    --separator-border-color: #000000;
+    --separator-space-top: 10px;
+    --separator-space-bottom: 10px;
+  }
 
   .glass {
     backdrop-filter: blur(23px) saturate(180%);
@@ -51,15 +51,15 @@ import { Blob } from '@components/BgBlob.tsx';
   }
 
   .separator {
-    margin-top: $separator-space-top;
-    margin-bottom: $separator-space-bottom;
+    margin-top: var(--separator-space-top);
+    margin-bottom: var(--separator-space-bottom);
     border: 0;
   }
 
   .separator--line {
     border: 0;
-    border-bottom: $separator-size $separator-border-style
-      $separator-border-color;
+    border-bottom: var(--separator-size) var(--separator-border-style)
+      var(--separator-border-color);
 
     width: 0;
     animation: separator-width 2s ease-out forwards;
@@ -71,76 +71,6 @@ import { Blob } from '@components/BgBlob.tsx';
     }
     100% {
       width: 100%;
-    }
-  }
-
-  @keyframes cursor {
-    from,
-    to {
-      border-color: transparent;
-    }
-    50% {
-      border-color: black;
-    }
-  }
-
-  @keyframes typing {
-    from {
-      width: 100%;
-    }
-    90%,
-    to {
-      width: 0;
-    }
-  }
-
-  @keyframes slide {
-    #{100% / $slides} {
-      font-size: $slider-font-size;
-      letter-spacing: 3px;
-    }
-    to {
-      font-size: 0;
-      letter-spacing: 0;
-    }
-  }
-
-  .typing-slider {
-    font-family: Consolas, monospace;
-    font-weight: bold;
-    text-align: center;
-    white-space: nowrap;
-  }
-
-  .typing-slider p {
-    position: relative;
-    display: inline;
-    font-size: 0;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    animation: slide $typing-duration * $slides step-start infinite;
-  }
-
-  .typing-slider p::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    border-left: 3px solid black;
-    animation:
-      typing $typing-duration infinite,
-      cursor 1s infinite;
-  }
-
-  @each $letters in $tab-letters {
-    $i: index($tab-letters, $letters);
-    .typing-slider p:nth-child(#{$i}) {
-      animation-delay: $typing-duration * ($i - 1);
-      &::after {
-        animation-delay: $typing-duration * ($i - 1);
-        animation-timing-function: steps(#{$letters}), step-end;
-      }
     }
   }
 </style>

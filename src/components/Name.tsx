@@ -1,67 +1,62 @@
-import { useRef, useEffect, type ReactNode, type RefObject } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 
-class Name {
-  private current: string;
-  private currIndex: number;
-  private target: string;
-  private element?: RefObject<HTMLElement>;
-
-  constructor(value: string, obj: RefObject<HTMLElement>) {
-    this.current = '';
-    this.currIndex = 0;
-    this.target = value;
-    this.element = obj;
-  }
-
-  tick() {
-    this.currIndex += 1;
-    this.current = this.target.slice(0, this.currIndex);
-    if (this.element) {
-      this.element.current.innerText = this.current;
-    }
-  }
-
-  get done(): boolean {
-    return this.currIndex === this.target.length;
-  }
-
-  get value(): string {
-    return this.current;
-  }
-
-  get length(): number {
-    return this.target.length + 1;
-  }
+export interface TypewriterProps {
+  text: string[];
+  delay: number;
 }
 
-export function CamiloCaridadPineda(props: {}): ReactNode {
-  const name1: RefObject<HTMLHeadingElement> = useRef();
-  const name2: RefObject<HTMLHeadingElement> = useRef();
-  const name3: RefObject<HTMLHeadingElement> = useRef();
+export interface TypewriterHeadingProps {
+  text: string;
+  delay: number;
+  wait: number;
+}
+
+export function TypewriterHeading({
+  text,
+  delay,
+  wait,
+}: TypewriterHeadingProps): ReactNode {
+  const [currentText, setCurrentText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  let waited = false;
 
   useEffect(() => {
-    const camilo = new Name('Camilo', name1);
-    const caridad = new Name('Caridad', name2);
-    const pineda = new Name('Pineda', name3);
+    if (wait && !waited) {
+      waited = true;
+      const timeout = setTimeout(() => {}, wait);
+      return () => clearTimeout(timeout);
+    }
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setCurrentText((prevText) => prevText + text[currentIndex]);
+        setCurrentIndex((prevIndex) => prevIndex + 1);
+      }, delay);
 
-    while (!camilo.done) {
-      setTimeout(camilo.tick, 100);
+      return () => clearTimeout(timeout);
     }
-    while (!caridad.done) {
-      setTimeout(caridad.tick, 100);
-    }
-    while (!pineda.done) {
-      setTimeout(pineda.tick, 100);
+  }, [currentIndex, delay, text]);
+
+  return <h1 className="text-9xl font-bold">{currentText}</h1>;
+}
+
+export function Typewriter({ text, delay }: TypewriterProps): ReactNode {
+  let wait = 0;
+  const waits = new Array(text.length).map((_, i) => {
+    if (i > 0) {
+      wait += text[i - 1].length * delay;
+      return wait;
+    } else {
+      return wait;
     }
   });
-
+  console.log(waits);
   return (
-    <>
-      <div className="text-center">
-        <h1 ref={name1} className="text-3xl font-bold"></h1>
-        <h1 ref={name2} className="text-3xl font-bold"></h1>
-        <h1 ref={name3} className="text-3xl font-bold"></h1>
-      </div>
-    </>
+    <div className="text-center">
+      {text.map((txt, i) => {
+        return (
+          <TypewriterHeading key={i} text={txt} delay={delay} wait={waits[i]} />
+        );
+      })}
+    </div>
   );
 }
