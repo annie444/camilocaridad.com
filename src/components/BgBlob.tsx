@@ -1,16 +1,23 @@
-import { type ReactNode, type RefObject, useRef, useEffect } from 'react';
+import {
+  type ReactNode,
+  type RefObject,
+  useRef,
+  useEffect,
+  useState,
+} from 'react';
 import { cn, isArrayString, round } from '@lib/utils.ts';
 import { animate, svg, utils, createScope, Scope } from 'animejs';
 
 export interface BlobProps {
-  numPoints: number | undefined;
+  numPoints?: number;
   color: string;
-  center: Point;
-  classes: string[] | undefined;
-  wobble: number | undefined;
-  radius: number | undefined;
-  randomness: number | undefined;
-  smoothing: number | undefined;
+  centerX: number;
+  centerY: number;
+  classes?: string[];
+  wobble?: number;
+  radius?: number;
+  randomness?: number;
+  smoothing?: number;
 }
 
 interface Point {
@@ -116,7 +123,8 @@ function generateBlobPath(
 
 export function Blob({
   numPoints = 6,
-  center,
+  centerX,
+  centerY,
   color,
   classes,
   wobble = 10,
@@ -124,8 +132,33 @@ export function Blob({
   randomness = 25,
   smoothing = 0.35,
 }: BlobProps): ReactNode {
-  let root: RefObject<SVGSVGElement> = useRef();
-  let scope: RefObject<Scope> = useRef();
+  let root: RefObject<SVGSVGElement | null> = useRef(null);
+  let scope: RefObject<Scope | null> = useRef(null);
+  let path1: RefObject<SVGPathElement | null> = useRef(null);
+  let path2: RefObject<SVGPathElement | null> = useRef(null);
+
+  const [blob1, setBlob1] = useState(
+    generateBlobPath(
+      centerX,
+      centerY,
+      numPoints,
+      wobble,
+      radius,
+      randomness,
+      smoothing
+    )
+  );
+  const [blob2, setBlob2] = useState(
+    generateBlobPath(
+      centerX,
+      centerY,
+      numPoints,
+      wobble,
+      radius,
+      randomness,
+      smoothing
+    )
+  );
 
   let classNames: string = '';
   try {
@@ -136,36 +169,40 @@ export function Blob({
   }
 
   useEffect(() => {
-    scope.current = createScope({ root }).add((scope) => {
-      const [$path1, $path2] = utils.$('path');
+    if (window) {
+      scope.current = createScope({ root }).add((scope) => {
+        function animateRandomPoints() {
+          if (path2.current !== null) {
+            // Update the points attribute on #path-2
+            utils.set(path2.current, {
+              d: generateBlobPath(
+                centerX,
+                centerY,
+                numPoints,
+                wobble,
+                radius,
+                randomness,
+                smoothing
+              ),
+            });
+            if (path1.current !== null) {
+              // Morph the points of #path-1 into #path-2
+              animate(path1.current, {
+                d: svg.morphTo(path2.current),
+                ease: 'inOutCirc',
+                duration: 1500,
+                opacity: 0.5,
+                onComplete: animateRandomPoints,
+              });
+            }
+          }
+        }
 
-      function animateRandomPoints() {
-        // Update the points attribute on #path-2
-        utils.set($path2, {
-          d: generateBlobPath(
-            center.x,
-            center.y,
-            numPoints,
-            wobble,
-            radius,
-            randomness,
-            smoothing
-          ),
-        });
-        // Morph the points of #path-1 into #path-2
-        animate($path1, {
-          d: svg.morphTo($path2),
-          ease: 'inOutCirc',
-          duration: 1500,
-          opacity: 0.5,
-          onComplete: animateRandomPoints,
-        });
-      }
+        animateRandomPoints();
+      });
 
-      animateRandomPoints();
-    });
-
-    return () => scope.current.revert();
+      return () => scope.current?.revert();
+    }
   }, []);
 
   return (
@@ -176,30 +213,16 @@ export function Blob({
       className={classNames}
     >
       <path
+        ref={path1}
         fill={color}
-        d={generateBlobPath(
-          center.x,
-          center.y,
-          numPoints,
-          wobble,
-          radius,
-          randomness,
-          smoothing
-        )}
+        d={blob1}
         transform="translate(100 100)"
         style={{ opacity: 0.5 }}
       ></path>
       <path
+        ref={path2}
         fill={color}
-        d={generateBlobPath(
-          center.x,
-          center.y,
-          numPoints,
-          wobble,
-          radius,
-          randomness,
-          smoothing
-        )}
+        d={blob2}
         transform="translate(100 100)"
         style={{ opacity: 0 }}
       ></path>

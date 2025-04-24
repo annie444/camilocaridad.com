@@ -18,37 +18,32 @@ export function TypewriterHeading({
 }: TypewriterHeadingProps): ReactNode {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  let waited = false;
 
   useEffect(() => {
-    if (wait && !waited) {
-      waited = true;
-      const timeout = setTimeout(() => {}, wait);
-      return () => clearTimeout(timeout);
-    }
     if (currentIndex < text.length) {
+      const time = currentIndex === 0 ? wait : delay;
       const timeout = setTimeout(() => {
         setCurrentText((prevText) => prevText + text[currentIndex]);
         setCurrentIndex((prevIndex) => prevIndex + 1);
-      }, delay);
-
+      }, time);
       return () => clearTimeout(timeout);
     }
-  }, [currentIndex, delay, text]);
+  }, [currentIndex, delay, text, wait]);
 
   return <h1 className="text-9xl font-bold">{currentText}</h1>;
 }
 
 export function Typewriter({ text, delay }: TypewriterProps): ReactNode {
   let wait = 0;
-  const waits = new Array(text.length).map((_, i) => {
-    if (i > 0) {
-      wait += text[i - 1].length * delay;
-      return wait;
+  const waits: number[] = [];
+  for (let i = 0; i < text.length; i++) {
+    if (i === 0) {
+      waits.push(0);
     } else {
-      return wait;
+      wait += text[i].length * delay;
+      waits.push(wait);
     }
-  });
+  }
   console.log(waits);
   return (
     <div className="text-center">
