@@ -1,0 +1,72 @@
+---
+import { Typewriter } from '@components/Name.tsx';
+import { NavBar } from '@components/NavBar.tsx';
+import { Blob } from '@components/BgBlob.tsx';
+---
+
+<div
+  class="w-[100vw] h-[100vh] m-auto flex flex-col flex-auto content-center items-center justify-center pointer-none glass z-10 relative"
+>
+  <div
+    class="flex flex-col flex-auto content-center justify-center items-center pointer-none"
+  >
+    <Typewriter client:load text={['Contact']} delay={100} />
+    <hr class="separator separator--line" />
+    <NavBar
+      client:only="react"
+      links={[
+        { href: '/about', text: 'About' },
+        { href: '/portfolio', text: 'Portfolio' },
+        { href: '/resume', text: 'Resume' },
+        { href: '/contact', text: 'Contact' },
+      ]}
+    />
+  </div>
+</div>
+
+<Blob client:load color="#D0006F" centerX={-30} centerY={-25} wobble={30} />
+<Blob client:load color="#d0c900" centerX={30} centerY={-75} wobble={30} />
+<Blob client:load color="#00d061" centerX={-30} centerY={-75} wobble={30} />
+<Blob client:load color="#0007d0" centerX={30} centerY={-25} wobble={30} />
+
+<script></script>
+
+<style>
+  :root {
+    --separator-size: 5px;
+    --separator-border-style: solid;
+    --separator-border-color: #000000;
+    --separator-space-top: 10px;
+    --separator-space-bottom: 10px;
+  }
+
+  .glass {
+    backdrop-filter: blur(23px) saturate(180%);
+    -webkit-backdrop-filter: blur(23px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0);
+  }
+
+  .separator {
+    margin-top: var(--separator-space-top);
+    margin-bottom: var(--separator-space-bottom);
+    border: 0;
+  }
+
+  .separator--line {
+    border: 0;
+    border-bottom: var(--separator-size) var(--separator-border-style)
+      var(--separator-border-color);
+
+    width: 0;
+    animation: separator-width 2s ease-out forwards;
+  }
+
+  @keyframes separator-width {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+</style>
