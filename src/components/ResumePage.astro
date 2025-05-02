@@ -1,24 +1,12 @@
 ---
-import { Typewriter } from '@components/Name.tsx';
-import { NavBar } from '@components/NavBar.tsx';
+import PageHeader from '@components/PageHeader.astro';
 import { Blob } from '@components/BgBlob.tsx';
-import { getPagesLinks } from '@/helpers/pages';
-import { PageText } from '@/constants/pages';
 ---
 
 <div
   class="w-[100vw] h-[100vh] m-auto py-4 flex flex-col flex-auto content-center items-center justify-center pointer-none glass z-10 relative"
 >
-  <div
-    class="flex flex-col flex-auto content-center justify-start items-center pointer-none"
-  >
-    <Typewriter client:load text={[PageText.Resume]} delay={100} isSmall />
-    <hr class="separator separator--line" />
-    <NavBar
-      client:only="react"
-      links={getPagesLinks({ excludeKey: 'resume' })}
-    />
-  </div>
+  <PageHeader pageKey="resume" />
 </div>
 
 <Blob client:load color="#D0006F" centerX={-30} centerY={-25} wobble={30} />
@@ -29,41 +17,9 @@ import { PageText } from '@/constants/pages';
 <script></script>
 
 <style>
-  :root {
-    --separator-size: 5px;
-    --separator-border-style: solid;
-    --separator-border-color: #000000;
-    --separator-space-top: 10px;
-    --separator-space-bottom: 10px;
-  }
-
   .glass {
     backdrop-filter: blur(23px) saturate(180%);
     -webkit-backdrop-filter: blur(23px) saturate(180%);
     background-color: rgba(255, 255, 255, 0);
-  }
-
-  .separator {
-    margin-top: var(--separator-space-top);
-    margin-bottom: var(--separator-space-bottom);
-    border: 0;
-  }
-
-  .separator--line {
-    border: 0;
-    border-bottom: var(--separator-size) var(--separator-border-style)
-      var(--separator-border-color);
-
-    width: 0;
-    animation: separator-width 2s ease-out forwards;
-  }
-
-  @keyframes separator-width {
-    0% {
-      width: 0;
-    }
-    100% {
-      width: 100%;
-    }
   }
 </style>
