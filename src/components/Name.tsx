@@ -3,18 +3,21 @@ import { useEffect, useState, type ReactNode } from 'react';
 export interface TypewriterProps {
   text: string[];
   delay: number;
+  isSmall?: boolean;
 }
 
 export interface TypewriterHeadingProps {
   text: string;
   delay: number;
   wait: number;
+  isSmall?: boolean;
 }
 
 export function TypewriterHeading({
   text,
   delay,
   wait,
+  isSmall = false,
 }: TypewriterHeadingProps): ReactNode {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,10 +33,18 @@ export function TypewriterHeading({
     }
   }, [currentIndex, delay, text, wait]);
 
-  return <h1 className="text-9xl font-bold">{currentText}</h1>;
+  return (
+    <h1 className={`${isSmall ? 'text-6xl' : 'text-9xl'} font-bold`}>
+      {currentText}
+    </h1>
+  );
 }
 
-export function Typewriter({ text, delay }: TypewriterProps): ReactNode {
+export function Typewriter({
+  text,
+  delay,
+  isSmall,
+}: TypewriterProps): ReactNode {
   let wait = 0;
   const waits: number[] = [];
   for (let i = 0; i < text.length; i++) {
@@ -44,12 +55,18 @@ export function Typewriter({ text, delay }: TypewriterProps): ReactNode {
       waits.push(wait);
     }
   }
-  console.log(waits);
+
   return (
     <div className="text-center">
       {text.map((txt, i) => {
         return (
-          <TypewriterHeading key={i} text={txt} delay={delay} wait={waits[i]} />
+          <TypewriterHeading
+            key={i}
+            text={txt}
+            delay={delay}
+            wait={waits[i]}
+            isSmall={isSmall}
+          />
         );
       })}
     </div>

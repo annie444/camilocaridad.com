@@ -2,6 +2,7 @@
 import { Typewriter } from '@components/Name.tsx';
 import { NavBar } from '@components/NavBar.tsx';
 import { Blob } from '@components/BgBlob.tsx';
+import { getPagesLinks } from '@/helpers/pages';
 ---
 
 <div
@@ -16,15 +17,7 @@ import { Blob } from '@components/BgBlob.tsx';
       delay={100}
     />
     <hr class="separator separator--line" />
-    <NavBar
-      client:only="react"
-      links={[
-        { href: '/about', text: 'About' },
-        { href: '/portfolio', text: 'Portfolio' },
-        { href: '/resume', text: 'Resume' },
-        { href: '/contact', text: 'Contact' },
-      ]}
-    />
+    <NavBar client:only="react" links={getPagesLinks({ excludeKey: 'home' })} />
   </div>
 </div>
 

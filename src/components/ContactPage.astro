@@ -2,24 +2,21 @@
 import { Typewriter } from '@components/Name.tsx';
 import { NavBar } from '@components/NavBar.tsx';
 import { Blob } from '@components/BgBlob.tsx';
+import { getPagesLinks } from '@/helpers/pages';
+import { PageText } from '@/constants/pages';
 ---
 
 <div
-  class="w-[100vw] h-[100vh] m-auto flex flex-col flex-auto content-center items-center justify-center pointer-none glass z-10 relative"
+  class="w-[100vw] h-[100vh] m-auto py-4 flex flex-col flex-auto content-center items-center justify-center pointer-none glass z-10 relative"
 >
   <div
-    class="flex flex-col flex-auto content-center justify-center items-center pointer-none"
+    class="flex flex-col flex-auto content-center justify-start items-center pointer-none"
   >
-    <Typewriter client:load text={['Contact']} delay={100} />
+    <Typewriter client:load text={[PageText.Contact]} delay={100} isSmall />
     <hr class="separator separator--line" />
     <NavBar
       client:only="react"
-      links={[
-        { href: '/about', text: 'About' },
-        { href: '/portfolio', text: 'Portfolio' },
-        { href: '/resume', text: 'Resume' },
-        { href: '/contact', text: 'Contact' },
-      ]}
+      links={getPagesLinks({ excludeKey: 'contact' })}
     />
   </div>
 </div>
