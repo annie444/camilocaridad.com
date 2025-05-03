@@ -1,5 +1,6 @@
 ---
 import '@styles/global.css';
+import { Blob } from '@components/BgBlob.tsx';
 ---
 
 <!doctype html>
@@ -13,7 +14,15 @@ import '@styles/global.css';
     <title>Astro Basics</title>
   </head>
   <body>
-    <slot />
+    <div
+      class="w-[100vw] h-[100vh] m-auto py-4 flex flex-col flex-auto content-center items-center justify-center pointer-none glass z-10 relative"
+    >
+      <slot />
+    </div>
+    <Blob client:load color="#D0006F" centerX={-30} centerY={-25} wobble={30} />
+    <Blob client:load color="#d0c900" centerX={30} centerY={-75} wobble={30} />
+    <Blob client:load color="#00d061" centerX={-30} centerY={-75} wobble={30} />
+    <Blob client:load color="#0007d0" centerX={30} centerY={-25} wobble={30} />
   </body>
 </html>
 
