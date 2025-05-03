@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { useEffect, useState, type ReactNode } from 'react';
 
 export interface TypewriterProps {
@@ -34,7 +35,7 @@ export function TypewriterHeading({
   }, [currentIndex, delay, text, wait]);
 
   return (
-    <h1 className={`${isSmall ? 'text-6xl' : 'text-9xl'} font-bold`}>
+    <h1 className={cn(isSmall ? 'text-6xl' : 'text-9xl', 'font-bold')}>
       {currentText}
     </h1>
   );
