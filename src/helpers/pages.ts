@@ -1,13 +1,16 @@
 import type { NavBarLink } from '@/components/NavBar';
-import { PAGES_CONFIG } from '@/constants/pages';
-import type { PageKey } from '@/types/pages';
+import { PAGES } from '@/constants/pages';
+import type { PageSlug } from '@/types/pages';
 
 export const getPagesLinks = ({
-  excludeKey,
+  excludeSlug,
 }: {
-  excludeKey: PageKey;
+  excludeSlug?: PageSlug;
 }): NavBarLink[] => {
-  return Object.entries(PAGES_CONFIG)
-    .filter(([key]) => key !== excludeKey)
-    .map(([_, value]) => value);
+  return PAGES.filter(({ slug }) => slug !== excludeSlug).map(
+    ({ slug, text }) => ({
+      href: slug ? `/${slug}` : '/',
+      text,
+    })
+  ) as NavBarLink[];
 };

@@ -1,28 +1,24 @@
 ---
-import { PAGES_CONFIG } from '@/constants/pages';
 import { Typewriter } from '@components/Name.tsx';
 import { NavBar } from '@components/NavBar.tsx';
 import { getPagesLinks } from '@/helpers/pages';
-import type { PageKey } from '@/types/pages';
+import type { Slug } from '@/types/pages';
+import type { PageText } from '@/constants/pages';
 
 interface PageHeaderProps {
-  pageKey: PageKey;
+  pageText: PageText;
+  excludeSlug: Slug;
 }
 
-const { pageKey } = Astro.props as PageHeaderProps;
+const { pageText, excludeSlug } = Astro.props as PageHeaderProps;
 ---
 
 <div
   class="flex flex-col flex-auto content-center justify-start items-center pointer-none"
 >
-  <Typewriter
-    client:load
-    text={[PAGES_CONFIG[pageKey].text]}
-    delay={100}
-    isSmall
-  />
+  <Typewriter client:load text={[pageText]} delay={100} isSmall />
   <hr class="separator separator--line" />
-  <NavBar client:only="react" links={getPagesLinks({ excludeKey: pageKey })} />
+  <NavBar client:only="react" links={getPagesLinks({ excludeSlug })} />
 </div>
 
 <style>
