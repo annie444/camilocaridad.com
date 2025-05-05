@@ -1,5 +1,4 @@
-import type { NavBarLink } from '@/components/NavBar';
-import type { PageKey } from '@/types/pages';
+import type { PageSlug } from '@/types/pages';
 
 export enum PageText {
   Home = 'Home',
@@ -9,10 +8,24 @@ export enum PageText {
   Contact = 'Contact',
 }
 
-export const PAGES_CONFIG: Record<PageKey, NavBarLink> = {
-  home: { href: '/', text: PageText.Home },
-  about: { href: '/about', text: PageText.About },
-  portfolio: { href: '/portfolio', text: PageText.Portfolio },
-  resume: { href: '/resume', text: PageText.Resume },
-  contact: { href: '/contact', text: PageText.Contact },
-};
+export const PAGES: Array<{
+  slug: string;
+  text: PageText;
+}> = [
+  {
+    slug: 'about',
+    text: PageText.About,
+  },
+  {
+    slug: 'portfolio',
+    text: PageText.Portfolio,
+  },
+  {
+    slug: 'resume',
+    text: PageText.Resume,
+  },
+  {
+    slug: 'contact',
+    text: PageText.Contact,
+  },
+] as const;

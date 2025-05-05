@@ -1,1 +1,3 @@
-export type PageKey = 'home' | 'about' | 'portfolio' | 'resume' | 'contact';
+import { PAGES } from '@/constants/pages';
+
+export type PageSlug = (typeof PAGES)[number]['slug'];

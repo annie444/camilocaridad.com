@@ -1,0 +1,31 @@
+---
+import { PAGES } from '@/constants/pages';
+import Layout from '@layouts/Layout.astro';
+import PageHeader from '@components/PageHeader.astro';
+
+export function getStaticPaths() {
+  return PAGES.map(({ slug, text }) => ({
+    params: { slug },
+    props: { text },
+  }));
+}
+
+const { slug } = Astro.params;
+const { text } = Astro.props;
+
+let Component;
+try {
+  console.log(`Trying to import component: ${slug}.tsx`);
+  const module = await import(`@/components/pages/${slug}.tsx`);
+  console.log({ module });
+  Component = module.default;
+} catch (error) {
+  console.error('Error importing component:', error);
+  return Astro.redirect('/404');
+}
+---
+
+<Layout>
+  <PageHeader pageText={text} excludeSlug={slug} />
+  <Component />
+</Layout>
