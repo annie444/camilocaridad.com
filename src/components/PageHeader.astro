@@ -2,12 +2,12 @@
 import { Typewriter } from '@components/Name.tsx';
 import { NavBar } from '@components/NavBar.tsx';
 import { getPagesLinks } from '@/helpers/pages';
-import type { Slug } from '@/types/pages';
-import type { PageText } from '@/constants/pages';
+import type { PAGE_TEXT } from '@/constants/pages';
+import type { PageSlug } from '@/types/pages';
 
 interface PageHeaderProps {
-  pageText: PageText;
-  excludeSlug: Slug;
+  pageText: PAGE_TEXT;
+  excludeSlug: PageSlug;
 }
 
 const { pageText, excludeSlug } = Astro.props as PageHeaderProps;

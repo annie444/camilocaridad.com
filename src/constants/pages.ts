@@ -1,31 +1,31 @@
 import type { PageSlug } from '@/types/pages';
 
-export enum PageText {
-  Home = 'Home',
-  About = 'About',
-  Portfolio = 'Portfolio',
-  Resume = 'Resume',
-  Contact = 'Contact',
+export enum PAGE_TEXT {
+  HOME = 'Home',
+  ABOUT = 'About',
+  PORTFOLIO = 'Portfolio',
+  RESUME = 'Resume',
+  CONTACT = 'Contact',
 }
 
 export const PAGES: Array<{
-  slug: string;
-  text: PageText;
+  slug: PageSlug;
+  text: PAGE_TEXT;
 }> = [
   {
     slug: 'about',
-    text: PageText.About,
+    text: PAGE_TEXT.ABOUT,
   },
   {
     slug: 'portfolio',
-    text: PageText.Portfolio,
+    text: PAGE_TEXT.PORTFOLIO,
   },
   {
     slug: 'resume',
-    text: PageText.Resume,
+    text: PAGE_TEXT.RESUME,
   },
   {
     slug: 'contact',
-    text: PageText.Contact,
+    text: PAGE_TEXT.CONTACT,
   },
 ] as const;

@@ -6,7 +6,6 @@ import vercel from '@astrojs/vercel';
 import svelte from '@astrojs/svelte';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
-import reactPlugin from '@vitejs/plugin-react';
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,7 +13,7 @@ export default defineConfig({
   integrations: [sitemap(), partytown(), svelte(), react()],
   adapter: vercel(),
   vite: {
-    plugins: [tailwindcss(), reactPlugin()],
+    plugins: [tailwindcss()],
     resolve: {
       alias: {
         '@': '/src',
