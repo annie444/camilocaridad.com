@@ -1,0 +1,59 @@
+---
+import { PAGES_CONFIG } from '@/constants/pages';
+import { Typewriter } from '@components/Name.tsx';
+import { NavBar } from '@components/NavBar.tsx';
+import { getPagesLinks } from '@/helpers/pages';
+import type { PageKey } from '@/types/pages';
+
+interface PageHeaderProps {
+  pageKey: PageKey;
+}
+
+const { pageKey } = Astro.props as PageHeaderProps;
+---
+
+<div
+  class="flex flex-col flex-auto content-center justify-start items-center pointer-none"
+>
+  <Typewriter
+    client:load
+    text={[PAGES_CONFIG[pageKey].text]}
+    delay={100}
+    isSmall
+  />
+  <hr class="separator separator--line" />
+  <NavBar client:only="react" links={getPagesLinks({ excludeKey: pageKey })} />
+</div>
+
+<style>
+  :root {
+    --separator-size: 5px;
+    --separator-border-style: solid;
+    --separator-border-color: #000000;
+    --separator-space-top: 10px;
+    --separator-space-bottom: 10px;
+  }
+  .separator {
+    margin-top: var(--separator-space-top);
+    margin-bottom: var(--separator-space-bottom);
+    border: 0;
+  }
+
+  .separator--line {
+    border: 0;
+    border-bottom: var(--separator-size) var(--separator-border-style)
+      var(--separator-border-color);
+
+    width: 0;
+    animation: separator-width 2s ease-out forwards;
+  }
+
+  @keyframes separator-width {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+</style>
