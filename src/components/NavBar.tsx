@@ -26,16 +26,11 @@ export function NavBar({ links }: NavBarProps): ReactNode {
       });
 
       animate('.svg-link', {
-        x: '360deg',
-        y: true,
-      });
-
-      animate('.svg-link', {
         rotate: '360deg',
         loop: true,
         loopDelay: 0,
         ease: 'linear',
-        duration: 1500,
+        duration: 1700,
       });
 
       setTimeout(() => {
@@ -115,25 +110,27 @@ export function NavBar({ links }: NavBarProps): ReactNode {
         <>
           <a
             key={i}
-            className={`px-2 text-xl cursor-pointer pointer-events-auto nav-link nav-link-${i} opacity-0 translate-y-1/2`}
+            aria-label={link.text}
+            className={`px-2 text-2xl cursor-pointer pointer-events-auto nav-link nav-link-${i} opacity-0 translate-y-1/2`}
             href={link.href}
             onMouseEnter={(e) => hoverIn(e, i)}
             onMouseLeave={() => hoverOut(i)}
             onMouseMove={(e) => hovering(e, i)}
+            onClick={() => hoverOut(i)}
           >
             {link.text}
           </a>
 
           <ReactCurvedText
-            width={50}
-            height={50}
-            cx={25}
-            cy={25}
-            rx={25}
-            ry={25}
+            width={70}
+            height={70}
+            cx={35}
+            cy={35}
+            rx={35}
+            ry={35}
             reversed={false}
             text={`${link.text} ${link.text} ${link.text} ${link.text}`}
-            textProps={{ style: { fontSize: 14 } }}
+            textProps={{ style: { fontSize: 18 } }}
             svgProps={{
               className: `svg-link svg-link-${i} opacity-0 absolute cursor-none pointer-events-none`,
             }}

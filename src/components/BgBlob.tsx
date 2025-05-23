@@ -189,7 +189,7 @@ export function Blob({
               // Morph the points of #path-1 into #path-2
               animate(path1.current, {
                 d: svg.morphTo(path2.current),
-                ease: 'inOutCirc',
+                ease: 'inOut',
                 duration: 1500,
                 opacity: 0.5,
                 onComplete: animateRandomPoints,

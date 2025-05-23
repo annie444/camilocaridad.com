@@ -1,25 +1,39 @@
 ---
 import '@styles/global.css';
+import Head from '@layouts/Head.astro';
+import { Blob } from '@components/BgBlob.tsx';
+import { cn } from '@lib/utils';
+
+interface Props {
+  title: string;
+  description?: string;
+  classNames?: string;
+}
+const { title, description, classNames } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
-  </head>
-  <body>
-    <slot />
+  <Head title={title} description={description} />
+  <body class="w-full h-full">
+    <div
+      class={cn(
+        `w-[100vw] h-full min-h-[100vh] m-auto flex flex-col flex-auto content-center items-center justify-center pointer-none glass z-10 relative ${classNames}`
+      )}
+    >
+      <slot />
+    </div>
+    <Blob client:load color="#D0006F" centerX={-30} centerY={-25} wobble={30} />
+    <Blob client:load color="#d0c900" centerX={30} centerY={-75} wobble={30} />
+    <Blob client:load color="#00d061" centerX={-30} centerY={-75} wobble={30} />
+    <Blob client:load color="#0007d0" centerX={30} centerY={-25} wobble={30} />
   </body>
 </html>
 
 <style>
-  body {
-    width: 100%;
-    height: 100%;
+  .glass {
+    backdrop-filter: blur(23px) saturate(180%);
+    -webkit-backdrop-filter: blur(23px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0);
   }
 </style>

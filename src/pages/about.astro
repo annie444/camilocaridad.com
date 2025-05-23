@@ -1,0 +1,103 @@
+---
+import { fade } from 'astro:transitions';
+import Layout from '@layouts/Layout.astro';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@components/ui/card';
+---
+
+<Layout
+  title="Camilo Caridad Pineda"
+  description="About Camilo"
+  transition:animate={fade({ duration: '0.4s' })}
+  classNames="card-container"
+>
+  <Card className="min-w-[250px] max-w-[450px] m-8 card-animation">
+    <CardHeader style={{ '--t': 0, '--b': 3 }}>
+      <CardTitle>Create project</CardTitle>
+      <CardDescription>Deploy your new project in one-click.</CardDescription>
+    </CardHeader>
+    <CardContent style={{ '--t': 0 }}>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    </CardContent>
+    <CardFooter>
+      Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus.
+    </CardFooter>
+  </Card>
+
+  <Card className="min-w-[250px] max-w-[450px] m-8 card-animation">
+    <CardHeader style={{ '--t': 1, '--b': 2 }}>
+      <CardTitle>Create project</CardTitle>
+      <CardDescription>Deploy your new project in one-click.</CardDescription>
+    </CardHeader>
+    <CardContent style={{ '--t': 1 }}>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    </CardContent>
+    <CardFooter>
+      Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus.
+    </CardFooter>
+  </Card>
+
+  <Card className="min-w-[250px] max-w-[450px] m-8 card-animation">
+    <CardHeader style={{ '--t': 2, '--b': 1 }}>
+      <CardTitle>Create project</CardTitle>
+      <CardDescription>Deploy your new project in one-click.</CardDescription>
+    </CardHeader>
+    <CardContent style={{ '--t': 2 }}>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    </CardContent>
+    <CardFooter>
+      Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus.
+    </CardFooter>
+  </Card>
+
+  <Card className="min-w-[250px] max-w-[450px] m-8 card-animation">
+    <CardHeader style={{ '--t': 3, '--b': 0 }}>
+      <CardTitle>Create project</CardTitle>
+      <CardDescription>Deploy your new project in one-click.</CardDescription>
+    </CardHeader>
+    <CardContent style={{ '--t': 3 }}>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    </CardContent>
+    <CardFooter>
+      Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus.
+    </CardFooter>
+  </Card>
+</Layout>
