@@ -9,23 +9,25 @@ export enum PAGE_TEXT {
 }
 
 export const PAGES: Array<{
-  slug: PageSlug;
-  text: PAGE_TEXT;
+  params: { slug: PageSlug };
+  props: { text: PAGE_TEXT };
 }> = [
   {
-    slug: 'about',
-    text: PAGE_TEXT.ABOUT,
+    params: { slug: 'about' },
+    props: { text: PAGE_TEXT.ABOUT },
   },
   {
-    slug: 'portfolio',
-    text: PAGE_TEXT.PORTFOLIO,
+    params: {
+      slug: 'portfolio',
+    },
+    props: { text: PAGE_TEXT.PORTFOLIO },
   },
   {
-    slug: 'resume',
-    text: PAGE_TEXT.RESUME,
+    params: { slug: 'resume' },
+    props: { text: PAGE_TEXT.RESUME },
   },
   {
-    slug: 'contact',
-    text: PAGE_TEXT.CONTACT,
+    params: { slug: 'contact' },
+    props: { text: PAGE_TEXT.CONTACT },
   },
 ] as const;

@@ -4,10 +4,7 @@ import Layout from '@layouts/Layout.astro';
 import PageHeader from '@components/PageHeader.astro';
 
 export function getStaticPaths() {
-  return PAGES.map(({ slug, text }) => ({
-    params: { slug },
-    props: { text },
-  }));
+  return PAGES;
 }
 
 const { slug } = Astro.params;
@@ -27,5 +24,5 @@ try {
 
 <Layout>
   <PageHeader pageText={text} excludeSlug={slug} />
-  <Component />
+  <Component client:only={'react'} />
 </Layout>
