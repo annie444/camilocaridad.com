@@ -1,3 +1,5 @@
+import { ResumePageContainer } from '@/components/ResumePageContainer';
+
 export default function Resume() {
-  return <div>Resume</div>;
+  return <ResumePageContainer />;
 }

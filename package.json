@@ -17,14 +17,17 @@
     "@astrojs/svelte": "^7.0.10",
     "@astrojs/vercel": "^8.1.3",
     "@gsap/react": "^2.1.2",
+    "@radix-ui/react-slot": "^1.2.0",
     "@tailwindcss/vite": "^4.1.4",
     "@types/react": "^19.1.2",
     "@types/react-curved-text": "^2.0.3",
     "@types/react-dom": "^19.1.2",
     "animejs": "^4.0.1",
     "astro": "^5.7.4",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "gsap": "^3.12.7",
+    "lucide-react": "^0.507.0",
     "react": "^19.1.0",
     "react-curved-text": "^3.0.1",
     "react-dom": "^19.1.0",
@@ -43,6 +46,8 @@
   },
   "devDependencies": {
     "prettier": "^3.5.3",
-    "prettier-plugin-astro": "^0.14.1"
-  }
+    "prettier-plugin-astro": "^0.14.1",
+    "tw-animate-css": "^1.2.9"
+  },
+  "packageManager": "pnpm@10.8.0+sha512.0e82714d1b5b43c74610193cb20734897c1d00de89d0e18420aebc5977fa13d780a9cb05734624e81ebd81cc876cd464794850641c48b9544326b5622ca29971"
 }
